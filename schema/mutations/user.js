@@ -53,7 +53,10 @@ const CREATE_USER = {
     password: { type: new GraphQLNonNull(GraphQLString) },
     status: { type: new GraphQLNonNull(GraphQLBoolean) },
   },
-  async resolve(parent, args) {
+  async resolve(parent, args, req) {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     const { name, username, password, status } = args;
 
     const user = await User.findOne({
@@ -81,7 +84,10 @@ const DELETE_USER = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  async resolve(parent, args) {
+  async resolve(parent, args, req) {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     const user = await User.findOne({
       where: {
         id: args.id,

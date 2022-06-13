@@ -18,11 +18,10 @@ const ADD_VISITOR = {
     status: { type: new GraphQLNonNull(GraphQLBoolean) },
     image_url: { type: new GraphQLNonNull(GraphQLString) },
   },
-  async resolve(parent, args) {
-    // ! uncomment if okay na ang tanan
-    /* if (!req.isAuth) {
+  async resolve(parent, args, req) {
+    if (!req.isAuth) {
       throw new Error('Unauthenticated!');
-    } */
+    }
     const { last_name, first_name, middle_name, purpose, status, image_url } =
       args;
     await Visitor.create({
@@ -48,7 +47,10 @@ const EDIT_VISITOR = {
     status: { type: new GraphQLNonNull(GraphQLBoolean) },
     image_url: { type: new GraphQLNonNull(GraphQLString) },
   },
-  async resolve(parent, args) {
+  async resolve(parent, args, req) {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     const { last_name, first_name, middle_name, purpose, status, image_url } =
       args;
     await Visitor.update(
@@ -78,7 +80,10 @@ const EDIT_VISITOR = {
 const DELETE_VISITOR = {
   type: VisitorType,
   args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-  async resolve(parent, args) {
+  async resolve(parent, args, req) {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     const visitor = await Visitor.findOne({
       where: {
         id: args.id,

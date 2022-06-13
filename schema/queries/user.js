@@ -4,7 +4,10 @@ const User = require('../../models').users;
 
 const GET_ALL_USERS = {
   type: new GraphQLList(UserType),
-  async resolve(parent, args) {
+  async resolve(parent, args, req) {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     try {
       const users = await User.findAll();
       return users;
@@ -17,7 +20,10 @@ const GET_ALL_USERS = {
 const GET_USER = {
   type: UserType,
   args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-  async resolve(parent, args) {
+  async resolve(parent, args, req) {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     try {
       const user = await User.findOne({
         where: {
