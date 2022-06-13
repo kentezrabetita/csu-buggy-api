@@ -3,7 +3,11 @@ const { GET_ALL_USERS, GET_USER } = require('./queries/user');
 const { CREATE_USER, DELETE_USER, LOGIN_USER } = require('./mutations/user');
 const { CREATE_NOTE } = require('./mutations/note');
 const { GET_USER_NOTES, GET_ALL_NOTES } = require('./queries/note');
-const { ADD_VISITOR } = require('./mutations/visitor');
+const {
+  ADD_VISITOR,
+  EDIT_VISITOR,
+  DELETE_VISITOR,
+} = require('./mutations/visitor');
 const { GET_ALL_VISITORS } = require('./queries/visitor');
 
 const RootQuery = new GraphQLObjectType({
@@ -25,6 +29,8 @@ const Mutation = new GraphQLObjectType({
     createNote: CREATE_NOTE,
     loginUser: LOGIN_USER,
     addVisitor: ADD_VISITOR,
+    editVisitor: EDIT_VISITOR,
+    deleteVisitor: DELETE_VISITOR,
   },
 });
 
