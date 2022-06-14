@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     middle_name: {
       type: Sequelize.STRING,
     },
+    mobile_number: {
+      type: Sequelize.INTEGER,
+    },
     purpose: {
       type: Sequelize.STRING,
     },
@@ -16,6 +19,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.BOOLEAN,
     },
     image_url: {
+      type: Sequelize.STRING,
+    },
+    code_url: {
       type: Sequelize.STRING,
     },
   });
