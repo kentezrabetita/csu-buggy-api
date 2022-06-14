@@ -16,3 +16,5 @@ this projects serves as a requirement to our web applications and development su
 - Express
 - GraphQL
 - MySQL
+- JWT authentication
+- bcrypt
