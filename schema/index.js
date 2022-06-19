@@ -8,6 +8,8 @@ const {
 } = require('./mutations/visitor');
 const { GET_ALL_VISITORS } = require('./queries/visitor');
 
+const { ADD_ITEM, EDIT_ITEM, DELETE_ITEM } = require('./mutations/item');
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
   fields: {
@@ -26,6 +28,9 @@ const Mutation = new GraphQLObjectType({
     addVisitor: ADD_VISITOR,
     editVisitor: EDIT_VISITOR,
     deleteVisitor: DELETE_VISITOR,
+    addItem: ADD_ITEM,
+    editItem: EDIT_ITEM,
+    deleteItem: DELETE_ITEM,
   },
 });
 
