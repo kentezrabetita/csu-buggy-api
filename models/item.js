@@ -1,5 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const Item = sequelize.define('item', {
+    user: {
+      type: Sequelize.INTEGER,
+    },
     owner: {
       type: Sequelize.STRING,
     },

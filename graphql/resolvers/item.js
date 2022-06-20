@@ -1,4 +1,8 @@
+const { AuthenticationError } = require('apollo-server');
+
 const Item = require('../../models/').items;
+const e = require('express');
+const isAuth = require('../../utils/auth');
 
 module.exports = {
   Query: {
@@ -11,9 +15,13 @@ module.exports = {
   Mutation: {
     async addItem(
       _,
-      { owner, owner_number, item_name, item_description, item_status }
+      { owner, owner_number, item_name, item_description, item_status },
+      context
     ) {
+      const userDetails = isAuth(context);
+
       await Item.create({
+        user: userDetails.id,
         owner,
         owner_number,
         item_name,
@@ -22,6 +30,7 @@ module.exports = {
       });
 
       return {
+        id: userDetails.id,
         owner,
         owner_number,
         item_name,
@@ -62,7 +71,9 @@ module.exports = {
         },
       });
     },
-    async deleteItem(_, { id }) {
+    async deleteItem(_, { id }, context) {
+      const userDetails = isAuth(context);
+
       const item = await Item.findOne({
         where: {
           id,
@@ -71,11 +82,15 @@ module.exports = {
 
       if (!item) throw new Error('Item not found!');
 
-      await Item.destroy({
-        where: {
-          id,
-        },
-      });
+      if (userDetails.id === item.user) {
+        await Item.destroy({
+          where: {
+            id,
+          },
+        });
+      } else {
+        throw new AuthenticationError('This action is not allowed!');
+      }
 
       return item;
     },

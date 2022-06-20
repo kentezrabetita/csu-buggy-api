@@ -10,6 +10,7 @@ const resolvers = require('./graphql/resolvers');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ req }),
 });
 
 require('dotenv').config();
@@ -25,14 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send('Your server is running!');
 });
-
-/* app.use(
-  '/graphql',
-  graphqlHTTP({
-    graphiql: true,
-    schema: schema,
-  })
-); */
 
 server.listen(process.env.PORT, () => {
   console.log('🚀 Server is running yehey! 🚀');
