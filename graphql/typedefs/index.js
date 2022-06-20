@@ -10,6 +10,19 @@ module.exports = gql`
     item_status: Boolean!
   }
 
+  type User {
+    id: ID!
+    username: String!
+    token: String!
+    createdAt: String!
+  }
+
+  input RegisterInput {
+    username: String!
+    password: String!
+    confirm_password: String!
+  }
+
   type Query {
     getItems: [Item]
   }
@@ -33,5 +46,7 @@ module.exports = gql`
     ): Item!
 
     deleteItem(id: ID!): Item!
+    registerUser(registerInput: RegisterInput): User!
+    login(username: String!, password: String!): User!
   }
 `;
