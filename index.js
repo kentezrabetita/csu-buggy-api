@@ -3,9 +3,14 @@ const app = express();
 const db = require('./models');
 const cors = require('cors');
 
-const { graphqlHTTP } = require('express-graphql');
-const schema = require('./schema');
-const isAuth = require('./middleware/is-auth');
+const { ApolloServer } = require('apollo-server');
+const typeDefs = require('./graphql/typedefs');
+const resolvers = require('./graphql/resolvers');
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
 require('dotenv').config();
 
@@ -17,20 +22,18 @@ app.use(express.urlencoded({ extended: true }));
   await db.sequelize.sync();
 })();
 
-app.use(isAuth);
-
 app.get('/', (req, res) => {
   res.send('Your server is running!');
 });
 
-app.use(
+/* app.use(
   '/graphql',
   graphqlHTTP({
     graphiql: true,
     schema: schema,
   })
-);
+); */
 
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log('🚀 Server is running yehey! 🚀');
 });
