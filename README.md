@@ -1,20 +1,20 @@
-# csu-visitors work in progress 🚩
+# task-tickets
 
 this projects serves as a requirement to our web applications and development subject.
 
 ## features
 
-- ✅ create/add visitors information
-- ✅ edit visitors information
-- ✅ view visitors information
-- ✅ delete visitors information
-- ☑️ generate qr code
+- ✅ create/add ticket
+- ✅ edit ticket details
+- ✅ view tickets
+- ✅ delete ticket
+- ✅ filters
+- ✅ search
 
 ## tech stack
 
 - Node.js
 - Express
 - GraphQL
+- Apollo
 - MySQL
-- JWT authentication
-- bcrypt
