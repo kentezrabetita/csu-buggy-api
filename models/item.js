@@ -1,14 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
   const Item = sequelize.define('item', {
-    user: {
-      type: Sequelize.INTEGER,
-    },
-    owner: {
-      type: Sequelize.STRING,
-    },
-    owner_number: {
-      type: Sequelize.STRING,
-    },
     item_name: {
       type: Sequelize.STRING,
     },
@@ -16,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     item_status: {
-      type: Sequelize.BOOLEAN,
+      type: Sequelize.STRING,
     },
   });
   return Item;

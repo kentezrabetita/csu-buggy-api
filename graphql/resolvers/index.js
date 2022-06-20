@@ -1,7 +1,4 @@
 const itemResolvers = require('./item');
-const userResolvers = require('./user');
-
-const Item = require('../../models').items;
 
 module.exports = {
   Query: {
@@ -10,6 +7,5 @@ module.exports = {
 
   Mutation: {
     ...itemResolvers.Mutation,
-    ...userResolvers.Mutation,
   },
 };
