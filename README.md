@@ -1,4 +1,4 @@
-# tickets-board
+# buggy-board
 
 keep track of bugs and cracks! 🪲
 
@@ -32,7 +32,7 @@ TBA
 - Node.js
 - Express
 - GraphQL
-- Apollo
+- Apollo Server
 - MySQL
 
 ## Run Locally 🚀
