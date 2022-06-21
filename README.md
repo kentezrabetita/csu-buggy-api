@@ -32,7 +32,7 @@ TBA
 - Node.js
 - Express
 - GraphQL
-- Apollo
+- Apollo Server
 - MySQL
 
 ## Run Locally 🚀
